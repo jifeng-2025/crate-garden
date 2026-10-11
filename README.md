@@ -31,7 +31,7 @@ git clone https://github.com/jifeng-2025/crate-garden.git
 3. 打开 `Assets/Scenes/CrateGarden.unity`，点击 Unity 顶部的 **Play**。
 4. 在主菜单点击 **Enter the garden** 开始；已有通关进度时，按钮显示为 **Continue journey**。
 
-工程使用 Unity 2022.3 LTS 系列。题目推荐的 2022.3.51f1 未单独实测，不将其列为已验证版本。运行和构建游戏不要求 Blender 或 MCP 服务在线。
+工程使用 Unity 2022.3 LTS 系列；其他补丁版本（包括 2022.3.51f1）未单独实测。首次打开需要联网还原 Unity 包依赖；游戏本身可以离线游玩，运行和构建不要求 Blender 或 MCP 服务在线。
 
 本地构建输出为 `Builds/Crate Garden.app`。GitHub 仓库提供源码，不包含该应用或 Unity 缓存；从仓库获取工程后，可按下文自行构建。
 
@@ -131,17 +131,21 @@ Unity 顶部 **Crate Garden** 菜单提供以下工具：
 | Build macOS | 生成 `Builds/Crate Garden.app`，写入构建报告 |
 | Prepare Main Scene | 重建入口场景和构建配置；会替换当前打开场景，使用前保存自己的修改 |
 
+构建 macOS 应用时，先退出 Play 模式，确认 Unity 已安装 macOS 构建支持，再选择 **Crate Garden → Build macOS**。输出位置为仓库根目录下的 `Builds/Crate Garden.app`，可在 Finder 中打开；本仓库没有附带预编译应用下载。
+
 报告：[自动测试](Docs/TEST_RESULTS.md) · [Play 模式回归](Docs/PLAYMODE_RESULTS.md) · [验收记录](Docs/ACCEPTANCE.md) · [构建结果](Docs/BUILD_RESULT.md)。
 
 ## 存档与当前边界
 
-存档位于 `Application.persistentDataPath`。macOS 通常为 `~/Library/Application Support/Garden Studio/Crate Garden/`，包含 `progress.json`、`levels.json` 和备份 `.bak`。编辑器与独立应用共用产品目录。退出或重开会重新开始当前局，已完成进度和最佳成绩保留。
+存档位于 `Application.persistentDataPath`。macOS 通常为 `~/Library/Application Support/Garden Studio/Crate Garden/`，包含 `progress.json`、`levels.json` 和备份 `.bak`。编辑器与独立应用共用产品目录。退出或重开会重新开始当前局，已完成进度和最佳成绩保留。**Continue journey** 会进入第一个尚未完成的内置关卡，不会恢复上次的中途棋盘；十二关全部完成后会从第一关重新开始。
+
+最佳成绩优先比较步数：步数更少时更新；步数相同则选择推箱次数更少的记录。用时只用于结算展示，不参与最佳成绩排名。
 
 当前为**英文游戏界面、中文说明文档**，面向桌面键鼠。没有触屏、手柄或移动平台支持；Windows、Linux 未实机验收。最佳成绩与自制关卡保存在本地，没有云同步。`Library`、`Temp`、日志、构建产物和个人存档均不上传仓库。
 
 ## 游玩流程与实机截图
 
-以下图片均来自 **Unity Play 模式下的实际游戏画面**，使用仓库中的 Blender 美术资源。截图按流程演示，采用独立演示存档；通关图通过实际移动完成关卡，未修改棋盘计数或拼接界面。
+以下图片均来自 **Unity Play 模式下的实际游戏画面**，使用仓库中的 Blender 美术资源。截图按流程演示，采用独立演示存档；通过自动调用游戏移动逻辑完成关卡，未修改棋盘计数或拼接界面。结算中的短用时来自自动回放，不代表人工游玩速度。
 
 ### 1. 进入箱庭
 
